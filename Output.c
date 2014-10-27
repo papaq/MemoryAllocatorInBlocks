@@ -2,7 +2,7 @@
 
 void new_line(int *current_pointer)
 {
-	if (0 == (current_pointer - global_mem) % 8)
+	if (0 == (current_pointer - global_mem) % 16)
 	{
 		printf("\n");
 	}
@@ -53,5 +53,16 @@ void mem_dump()
 
 		new_line(ptr);
 	}
+
+	printf("\n");
+}
+
+void print_line(char * line)
+{
+	for (int i = 0; i < strlen(line)/sizeof(char); i++)
+	{
+		printf("%c", line[i]);
+	}
+	printf("\n\n");
 }
 

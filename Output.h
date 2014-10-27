@@ -9,3 +9,5 @@
 #define FREESPC '*'
 
 void mem_dump();
+
+void print_line(char *line);

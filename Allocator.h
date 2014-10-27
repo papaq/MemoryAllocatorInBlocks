@@ -1,6 +1,6 @@
 #pragma once
 
-#define MEM_SIZE 1024
+#define MEM_SIZE 256
 
 #include <stdio.h>
 
@@ -15,8 +15,6 @@ void *mem_alloc(size_t size);
 void *mem_realloc(void *addr, size_t size);
 
 void mem_free(void *addr);
-
-void test();
 
 int get_head_byte(int num);
 
