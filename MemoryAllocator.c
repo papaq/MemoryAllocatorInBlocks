@@ -25,10 +25,10 @@ int main()
 	mem_free(b);
 	mem_dump();
 
-	line = "mem_realloc(c, 8)";
+	line = "mem_realloc(c, 4)";
 	print_line(line);
 
-	void *new_c = mem_realloc(c, 8);
+	void *new_c = mem_realloc(c, 7);
 	mem_dump();
 
 	line = "mem_realloc(a, 21)";

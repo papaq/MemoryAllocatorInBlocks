@@ -46,10 +46,11 @@ int *find_free_space(int size)
 		int *j = current_start_point;
 		while (j < MEM_SIZE + global_mem)
 		{
-			if (get_head_byte(*current_start_point) == 1)
+			if (get_head_byte(*(current_start_point + curr_size / 4)) == 1)
 			{
 				// + 1, because we suppose the block to start after the header 4 bytes
-				current_start_point = j + get_size_of_block(*current_start_point) + 1;
+				current_start_point = j + 
+					get_size_of_block(*(current_start_point + curr_size / 4)) + 1;
 				break;
 			}
 
@@ -69,8 +70,8 @@ int *find_free_space(int size)
 
 void *mem_alloc(size_t size)
 {
-	// Looking for size + 1 because of header 1 *sizeof(int) bytes
-	int *ptr_to_free = find_free_space(size + 1);
+	// Looking for size + 1 *sizeof(int) because of header
+	int *ptr_to_free = find_free_space(size + 1 * sizeof(int));
 
 	if (!ptr_to_free)
 	{
@@ -91,7 +92,7 @@ void *mem_realloc(void *addr, size_t size)
 	}
 
 	int header = *((int*)addr - 1);
-	int size_of_block = get_size_of_block(header);
+	int size_of_block = get_size_of_block(header)*4;
 	int size_of_busy_block = size_of_block - get_free_in_block(header);
 
 	if (size == size_of_busy_block)
